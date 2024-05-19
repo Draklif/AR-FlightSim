@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474156607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.31, z: 0}
+  m_LocalPosition: {x: 0, y: -0.31, z: 3.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -709,7 +709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1132363881725136029, guid: a5bba4471f2b885428541314bad7877b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 6.57
       objectReference: {fileID: 0}
     - target: {fileID: 1132363881725136029, guid: a5bba4471f2b885428541314bad7877b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -776,7 +776,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8017404760261476818}
   serializedVersion: 2
-  m_Mass: 20411
+  m_Mass: 10411
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -796,7 +796,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 1.5, z: 17.661146}
-  m_Center: {x: 0, y: 1.21, z: 2.904914}
+  m_Center: {x: 0, y: 1.25, z: 2.5}
 --- !u!114 &8269662516739831930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1158,6 +1158,7 @@ MonoBehaviour:
   - {fileID: 8255551974045747084}
   - {fileID: 6564085276594825890}
   - {fileID: 474156607}
+  - {fileID: 0}
 --- !u!1 &8255551974045747084 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1814723870761488505, guid: a5bba4471f2b885428541314bad7877b, type: 3}

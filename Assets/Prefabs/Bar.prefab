@@ -166,5 +166,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2099869584caa9947b3412ce6b6dc608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillDirection: 0
+  fillDirection: 2
   fill: {fileID: 4819415882058093059}
