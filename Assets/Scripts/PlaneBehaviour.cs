@@ -49,6 +49,7 @@ public class PlaneBehaviour : MonoBehaviour
     public Rigidbody Rigidbody { get; private set; }
     public float Throttle { get; private set; }
     public Vector3 EffectiveInput { get; private set; }
+    public Vector3 ActualInput { get; private set; }
     public Vector3 Velocity { get; private set; }
     public Vector3 LocalVelocity { get; private set; }
     public Vector3 LocalGForce { get; private set; }
@@ -259,11 +260,11 @@ public class PlaneBehaviour : MonoBehaviour
     void UpdateThrottle(float dt)
     {
         float target = 0;
-        if (throttleInput > 0) target = 1;
+        if (throttleInput > 0f) target = 1;
 
         Throttle = Utilities.MoveTo(Throttle, target, throttleSpeed * Mathf.Abs(throttleInput), dt);
 
-        AirbrakeDeployed = Throttle == 0 && throttleInput == -1;
+        AirbrakeDeployed = Throttle == 0 && throttleInput <= -0.8;
 
         if (AirbrakeDeployed)
         {
@@ -296,9 +297,6 @@ public class PlaneBehaviour : MonoBehaviour
         );
 
         Vector3 yawForce = CalculateLift(AngleOfAttackYaw, Vector3.up, rudderPower, rudderAOACurve, rudderInducedDragCurve);
-
-        Debug.Log("yaw >" + yawForce);
-        Debug.Log("lift >" + liftForce);
 
         Rigidbody.AddRelativeForce(liftForce);
         Rigidbody.AddRelativeForce(yawForce);
@@ -366,7 +364,13 @@ public class PlaneBehaviour : MonoBehaviour
     // Controls
     public void SetControlInput(Vector3 input)
     {
-        if (!IsDead) controlInput = input;
+        if (!IsDead)
+        {
+            if (controlInput.x < 0.1 && controlInput.x > -0.1) controlInput.x = 0;
+            if (controlInput.z < 0.1 && controlInput.z > -0.1) controlInput.z = 0;
+            controlInput = input;
+            ActualInput = input;
+        }      
     }
 
     public void SetThrottleInput(float input)

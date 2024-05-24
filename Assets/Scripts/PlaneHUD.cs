@@ -10,6 +10,10 @@ public class PlaneHUD : MonoBehaviour {
     [SerializeField] Compass compass;
     [SerializeField] PitchLadder pitchLadder;
     [SerializeField] Bar throttleBar;
+    [SerializeField] Bar pitchBarPos;
+    [SerializeField] Bar pitchBarNeg;
+    [SerializeField] Bar rollBarRight;
+    [SerializeField] Bar rollBarLeft;
     [SerializeField] Transform hudCenter;
     [SerializeField] Transform velocityMarker;
     [SerializeField] Transform altimeterMarker;
@@ -17,6 +21,7 @@ public class PlaneHUD : MonoBehaviour {
     [SerializeField] TMP_Text aoaIndicator;
     [SerializeField] TMP_Text gforceIndicator;
     [SerializeField] TMP_Text altitude;
+    [SerializeField] TMP_Text airbrake;
 
     PlaneBehaviour plane;
     Transform planeTransform;
@@ -144,13 +149,36 @@ public class PlaneHUD : MonoBehaviour {
 
         throttleBar.SetValue(plane.Throttle);
 
+        if (plane.ActualInput.z >= 0)
+        {
+            rollBarLeft.SetValue(0);
+            rollBarRight.SetValue(plane.ActualInput.z);
+        }
+        else
+        {
+            rollBarRight.SetValue(0);
+            rollBarLeft.SetValue(Mathf.Abs(plane.ActualInput.z));
+        }
+
+        if (plane.ActualInput.x >= 0)
+        {
+            pitchBarNeg.SetValue(0);
+            pitchBarPos.SetValue(plane.ActualInput.x);
+        }
+        else
+        {
+            pitchBarPos.SetValue(0);
+            pitchBarNeg.SetValue(Mathf.Abs(plane.ActualInput.x));
+        }
+
         if (!plane.IsDead) {
             UpdateMarkers();
             UpdateHUDCenter();
         } else {
-            hudCenterGO.SetActive(false);
-            velocityMarkerGO.SetActive(false);
+            gameObject.SetActive(false);
         }
+
+        airbrake.text = plane.AirbrakeDeployed ? "FRENO" : "";
 
         UpdateAirspeed();
         UpdateAltitude();
