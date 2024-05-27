@@ -170,6 +170,17 @@
                     "action": "TogglePause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f57f67a-6d18-4f0f-bd97-7200728b6ba9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TogglePause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

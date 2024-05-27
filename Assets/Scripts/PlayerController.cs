@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlaneHUD planeHUD;
     [SerializeField] GameObject hudPause;
     [SerializeField] GameObject hudMain;
+    [SerializeField] GameObject hudDeath;
 
     Vector3 controlInput;
     PlaneCamera planeCamera;
@@ -44,6 +45,14 @@ public class PlayerController : MonoBehaviour
         }
 
         planeCamera.SetPlane(plane);
+    }
+
+    private void FixedUpdate()
+    {
+        if (plane.IsDead)
+        {
+            hudDeath.SetActive(true);
+        }
     }
 
     IEnumerator ReadDataFromSerialPort()
@@ -138,7 +147,10 @@ public class PlayerController : MonoBehaviour
     public void Reload(string sceneName)
     {
         Load(sceneName);
-        Pause();
+        if (!hudDeath.active)
+        {
+            Pause();
+        }
     }
 
     public void Load(string sceneName)
